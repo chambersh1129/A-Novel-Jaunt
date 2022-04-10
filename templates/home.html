@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Diary{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="tile is-ancestor">
+    <div class="tile is-vertical is-8">
+        <div class="tile">
+            <div class="tile is-parent is-vertical">
+                <article class="tile is-child notification is-primary">
+                    <p class="title has-text-centered">Distance traveled</p>
+                    <p class="subtitle m-auto">3.8 miles this week</p>
+                    <p class="subtitle m-auto">20.5 miles this month</p>
+                    <p class="subtitle m-auto">138.2 miles this year</p>
+                    <p class="subtitle m-auto">250.0 miles total</p>
+                </article>
+                <article class="tile is-child notification is-warning has-text-centered">
+                    <p class="title">Favorite Activity</p>
+                    <div class="tile">
+                        <div class="tile is-child is-6">
+                            <p class="subtitle">By Count</p>
+                            <span class="icon"><i class="fas fa-4x fa-running"></i></span>
+                        </div>
+                        <div class="tile is-child is-6">
+                            <p class="subtitle">By Distance</p>
+                            <span class="icon"><i class="fas fa-4x fa-biking"></i></span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-info">
+                    <p class="title has-text-centered">Mood</p>
+                    <div class="content">
+                        <canvas id="mood-chart" width="100%" height="100%"></canvas>
+                    </div>
+                    <div class="tile has-text-centered">
+                        <div class="tile is-child has-text-success">
+                            <span class="icon"><i class="fas fa-4x fa-grin"></i></span>
+                        </div>
+                        <div class="tile is-child has-text-warning">
+                            <span class="icon"><i class="fas fa-4x fa-meh"></i></span>
+                        </div>
+                        <div class="tile is-child has-text-danger">
+                            <span class="icon"><i class="fas fa-4x fa-frown"></i></span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-danger">
+                <p class="title has-text-centered">Recent Badges</p>
+                <div class="content">
+                    <!-- Content -->
+                </div>
+            </article>
+        </div>
+    </div>
+    <div class="tile is-parent">
+        <article class="tile is-child notification is-success">
+            <p class="title has-text-centered">Literary Quote</p>
+            <div class="content">
+                <figure class="image is-4by3">
+                    <img src="{% static 'images/pride_and_prejudice.jpg' %}" alt="Placeholder image">
+                </figure>
+                <p class="subtitle m-auto">
+                    <em>
+                        "To walk three miles, or four miles, or five miles, or whatever it is, above her ankles in dirt,
+                        and alone, quite alone! what could she mean by it? It seems to me to show an abominable sort of
+                        conceited independence, a most country-town indifference to decorum."
+                    </em>
+                </p>
+                <p class="subtitle m-auto">- Jane Austen, Pride and Prejudice</p>
+
+            </div>
+        </article>
+    </div>
+</div>
+<script>
+    var data = [300, 100, 50]
+</script>
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/home.js' %}"></script>
+
+{% else %}
+<h1 class="title">A Novel Jaunt</h1>
+<h2 class="subtitle">Excercise and mood tracker with a focus on literature. Please login to start record your latest
+    jaunt.</h2>
+<h2 class="subtitle has-text-danger">Please Note: This application is not open to enrollement at this time</h2>
+{% endif %}
+{% endblock content %}

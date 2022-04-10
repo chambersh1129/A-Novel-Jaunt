@@ -1,0 +1,147 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}A Novel Jaunt{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <p class="navbar-item is-size-3">A Novel Jaunt</p>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarHeader">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarHeader" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'home' %}">
+                    Home
+                </a>
+                {% if user.is_authenticated %}
+                <a class="navbar-item" href="{% url 'calendar' %}">
+                    Calendar
+                </a>
+
+                {% endif %}
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {% if user.is_authenticated %}
+                        <a class="button is-primary js-modal-trigger" data-target="modal-js-example">
+                            <strong>Go on a Jaunt</strong>
+                        </a>
+                        <a class="button is-light" href="{% url 'logout' %}">
+                            <strong>Log Out</strong>
+                        </a>
+                        {% else %}
+                        <a class="button is-light" href="{% url 'login' %}">
+                            <strong>Log In</strong>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="modal-js-example" class="modal">
+        <div class="modal-background is-dark"></div>
+
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Record a Jaunt</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Distance</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="3.1">
+                    </div>
+                    <p class="help">in miles</p>
+                </div>
+                <div class="field">
+                    <label class="label">Activity</label>
+                    <div class="control">
+                        <div class="tile is-parent">
+                            <div class="tile is-child has-text-centered is-one-forth">
+                                <label class="radio">
+                                    <input type="radio" name="activity">
+                                    <span class="icon m-2"><i class="fas fa-2x fa-walking"></i></span>
+                                </label>
+                            </div>
+                            <div class="tile is-child has-text-centered is-one-forth">
+                                <label class="radio">
+                                    <input type="radio" name="activity">
+                                    <span class="icon m-2"><i class="fas fa-2x fa-running"></i></span>
+                                </label>
+                            </div>
+                            <div class="tile is-child has-text-centered is-one-forth">
+                                <label class="radio">
+                                    <input type="radio" name="activity">
+                                    <span class="icon m-2"><i class="fas fa-2x fa-hiking"></i></span>
+                                </label>
+                            </div>
+                            <div class="tile is-child has-text-centered is-one-forth">
+                                <label class="radio">
+                                    <input type="radio" name="activity">
+                                    <span class="icon m-2"><i class="fas fa-2x fa-biking"></i></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Mood</label>
+                    <div class="control">
+                        <div class="tile is-parent">
+                            <div class="tile is-child has-text-success has-text-centered is-one-third">
+                                <label class="radio">
+                                    <input type="radio" name="mood">
+                                    <span class="icon m-2"><i class="fas fa-2x fa-grin"></i></span>
+                                </label>
+                            </div>
+                            <div class="tile is-child has-text-warning has-text-centered is-one-third">
+                                <label class="radio">
+                                    <input type="radio" name="mood">
+                                    <span class="icon m-2"><i class="fas fa-2x fa-meh"></i></span>
+
+                                </label>
+                            </div>
+                            <div class="tile is-child has-text-danger has-text-centered is-one-third">
+                                <label class="radio">
+                                    <input type="radio" name="mood">
+                                    <span class="icon m-2"><i class="fas fa-2x fa-frown"></i></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">Submit</button>
+                <button class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+    <section class="section">
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </section>
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+
+</html>
