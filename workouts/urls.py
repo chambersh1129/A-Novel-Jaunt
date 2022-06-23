@@ -1,5 +1,6 @@
 from django.urls import path
-from workouts.views import HomePageView, CalendarPageView
+
+from workouts.views import CalendarPageView, HomePageView
 
 urlpatterns = [
     path("", HomePageView.as_view(), name="home"),
